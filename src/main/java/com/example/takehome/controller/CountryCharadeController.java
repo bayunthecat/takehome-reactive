@@ -1,6 +1,6 @@
 package com.example.takehome.controller;
 
-import com.example.takehome.model.dto.CountryCharadeApi;
+import com.example.takehome.model.dto.CountryQuizApi;
 import com.example.takehome.service.CountryService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,8 +20,8 @@ public class CountryCharadeController {
         this.countryService = countryService;
     }
 
-    @GetMapping("/country-charade")
-    private Mono<CountryCharadeApi> countries(@RequestParam("codes") List<String> countryCodes) {
-        return countryService.solveCharade(countryCodes);
+    @GetMapping("/country-quiz/solution")
+    private Mono<CountryQuizApi> countries(@RequestParam("codes") List<String> countryCodes) {
+        return countryService.solve(countryCodes);
     }
 }

@@ -6,19 +6,6 @@ services:
       - "6379:6379"
     networks:
       - takehome-nw
-  takehome:
-    depends_on:
-      - keycloak
-      - postgres
-      - redis-service
-    container_name: takehome
-    ports:
-      - "8080:8080"
-    expose:
-      - 8080
-    build: .
-    networks:
-      - takehome-nw
 
 networks:
   takehome-nw:

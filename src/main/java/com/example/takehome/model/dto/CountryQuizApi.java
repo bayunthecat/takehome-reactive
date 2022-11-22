@@ -7,7 +7,7 @@ import java.util.List;
 
 @Data
 @Builder(toBuilder = true)
-public class CountryCharadeApi {
+public class CountryQuizApi {
 
     private List<ContinentApi> continents;
 

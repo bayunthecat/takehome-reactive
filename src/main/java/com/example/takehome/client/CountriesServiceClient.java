@@ -1,6 +1,6 @@
 package com.example.takehome.client;
 
-import com.example.takehome.client.dto.CountriesResponse;
+import com.example.takehome.client.dto.CountriesResponseDto;
 import com.example.takehome.client.dto.CountryDto;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
@@ -34,7 +34,7 @@ public class CountriesServiceClient {
                 .accept(MediaType.APPLICATION_JSON)
                 .body(Mono.just(String.format(FETCH_COUNTRIES_BY_CODES, formattedCode)), String.class)
                 .retrieve()
-                .bodyToMono(CountriesResponse.class)
+                .bodyToMono(CountriesResponseDto.class)
                 .map(response -> response.getData().getCountries());
     }
 
@@ -44,7 +44,7 @@ public class CountriesServiceClient {
         return webClient.post().accept(MediaType.APPLICATION_JSON)
                 .body(Mono.just(String.format(FETCH_COUNTRIES_BY_CONTINENT_WITH_EXCLUDE, formattedContinentCodes, formattedExcludes)), String.class)
                 .retrieve()
-                .bodyToMono(CountriesResponse.class)
+                .bodyToMono(CountriesResponseDto.class)
                 .map(response -> response.getData().getCountries());
     }
 

@@ -14,7 +14,6 @@ public class RedisConfiguration {
     public ReactiveRedisTemplate<String, Long> reactiveRedisTemplate(ReactiveRedisConnectionFactory factory) {
         return new ReactiveRedisTemplate<String, Long>(
                 factory,
-                //TODO try and fix dis bs
                 RedisSerializationContext.fromSerializer(new Jackson2JsonRedisSerializer(Long.class)));
     }
 }

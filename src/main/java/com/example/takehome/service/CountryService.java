@@ -4,7 +4,7 @@ import com.example.takehome.client.CountriesServiceClient;
 import com.example.takehome.client.dto.ContinentDto;
 import com.example.takehome.client.dto.CountryDto;
 import com.example.takehome.model.dto.ContinentApi;
-import com.example.takehome.model.dto.CountryCharadeApi;
+import com.example.takehome.model.dto.CountryQuizApi;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
@@ -21,9 +21,7 @@ public class CountryService {
         this.countriesServiceClient = countriesServiceClient;
     }
 
-    //TODO rename method
-    //TODO rewrite method to be more readable
-    public Mono<CountryCharadeApi> solveCharade(List<String> countryCodes) {
+    public Mono<CountryQuizApi> solve(List<String> countryCodes) {
         return countriesServiceClient.getCountriesByCodes(countryCodes)
                 .map(countries -> countries.stream().collect(Collectors.groupingBy(country -> country.getContinent().getCode(), Collectors.collectingAndThen(Collectors.toList(), groupedCountries -> groupedCountries.stream().map(CountryDto::getCode).toList()))))
                 .flatMap(countriesByContinent -> {
@@ -42,12 +40,11 @@ public class CountryService {
                         final var continents = Arrays.stream(args)
                                 .map(arg -> (ContinentApi) arg)
                                 .toList();
-                        return CountryCharadeApi.builder()
+                        return CountryQuizApi.builder()
                                 .continents(continents)
                                 .build();
                     });
                 })
-                //TODO remove later, throw exception
-                .onErrorReturn(CountryCharadeApi.builder().build());
+                .onErrorReturn(CountryQuizApi.builder().build());
     }
 }

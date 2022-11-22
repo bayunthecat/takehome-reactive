@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class CountriesResponseData {
+public class CountriesResponseDataDto {
 
     private List<CountryDto> countries;
 }
